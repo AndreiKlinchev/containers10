@@ -1,5 +1,5 @@
 CREATE TABLE page (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     title TEXT,
     content TEXT
 );

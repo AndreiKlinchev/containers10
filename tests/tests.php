@@ -2,10 +2,14 @@
 
 require_once __DIR__ . '/testframework.php';
 
-require_once __DIR__ . '/../modules/database.php';
-require_once __DIR__ . '/../modules/page.php';
+require_once __DIR__ . '/../site/modules/database.php';
+require_once __DIR__ . '/../site/modules/page.php';
 
 $tests = new TestFramework();
+
+function getTestDbDsn() {
+    return 'sqlite:' . __DIR__ . '/test.sqlite';
+}
 
 function getTestDbPath() {
     return __DIR__ . '/test.sqlite';
@@ -22,7 +26,7 @@ function createTestDatabase() {
         unlink($path);
     }
 
-    $db = new Database($path);
+    $db = new Database(getTestDbDsn(), '', '');
     $db->Execute('CREATE TABLE page (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, content TEXT)');
     $db->Execute("INSERT INTO page (title, content) VALUES ('Page 1', 'Content 1')");
     $db->Execute("INSERT INTO page (title, content) VALUES ('Page 2', 'Content 2')");
